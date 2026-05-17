@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santiago Ríos – Diseño Web en León, Guanajuato</title>
+<meta name="description" content="Santiago Ríos, diseñador web en León, Guanajuato. Creamos páginas web profesionales para tu negocio. Contáctanos por WhatsApp.">
+<meta name="keywords" content="diseño web León Guanajuato, páginas web León, Santiago Ríos diseñador web, páginas web profesionales León">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --off-white: #f7f6f3;
+    --black: #0d0d0d;
+    --gray: #6b6b6b;
+    --light-gray: #e8e6e1;
+    --accent: #1a1a1a;
+    --green: #2d6a4f;
+    --green-light: #52b788;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, opacity 0.3s, border-color 0.3s;
+    opacity: 0.5;
+    mix-blend-mode: difference;
+  }
+  .cursor.hover { width: 18px; height: 18px; background: white; }
+  .cursor-ring.hover { width: 52px; height: 52px; opacity: 0.35; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-cta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .nav-cta:hover { color: var(--green); border-color: var(--green); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--off-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 4rem;
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--light-gray);
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gray);
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 2rem;
+  }
+  .hero-name em { font-style: italic; color: var(--green); }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 380px;
+    font-weight: 300;
+  }
+
+  .hero-right {
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: 'SR';
+    position: absolute;
+    bottom: -2rem;
+    right: -1rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18rem;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-stat { margin-bottom: 3rem; position: relative; z-index: 2; }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero-stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .hero-divider { width: 40px; height: 1px; background: rgba(255,255,255,0.15); margin-bottom: 3rem; }
+
+  .hero-services { list-style: none; position: relative; z-index: 2; }
+  .hero-services li {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: color 0.3s;
+  }
+  .hero-services li:hover { color: rgba(255,255,255,0.9); }
+  .hero-services li::before { content: '→'; color: var(--green-light); font-size: 0.75rem; }
+
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--black);
+    padding: 1.2rem 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    flex-shrink: 0;
+  }
+  .marquee-dot { color: var(--green-light); margin-right: 4rem; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .portfolio { padding: 8rem 4rem; background: var(--white); }
+  .portfolio-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--black);
+  }
+
+  .portfolio-card {
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .portfolio-card { grid-template-columns: 1fr; }
+  }
+  .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.08); }
+
+  .portfolio-preview {
+    background: linear-gradient(135deg, #1a1209 0%, #3b2410 50%, #1a1209 100%);
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.2) 0%, transparent 60%);
+  }
+  .portfolio-preview-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: #c9a84c;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 2;
+  }
+
+  .portfolio-info { padding: 2rem; background: var(--off-white); }
+  .portfolio-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .portfolio-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .portfolio-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+  .portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .portfolio-link:hover { color: var(--green); border-color: var(--green); }
+
+  .process { padding: 8rem 4rem; background: var(--off-white); }
+  .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 4rem; }
+  .process-item {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    transition: background 0.3s;
+  }
+  .process-item:hover { background: var(--black); }
+  .process-item:hover .process-num,
+  .process-item:hover .process-title,
+  .process-item:hover .process-text { color: rgba(255,255,255,0.7); }
+  .process-item:hover .process-title { color: var(--white); }
+  .process-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--light-gray);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+  .process-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+    transition: color 0.3s;
+  }
+  .process-text { font-size: 0.85rem; color: var(--gray); line-height: 1.7; transition: color 0.3s; }
+
+  .cta-section {
+    padding: 10rem 4rem;
+    background: var(--black);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(45,106,79,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-title em { font-style: italic; color: var(--green-light); }
+  .cta-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3.5rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+    padding: 1.1rem 2.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    position: relative;
+    z-index: 2;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .cta-btn:hover { background: var(--green-light); transform: translateY(-2px); }
+  .cta-btn svg { width: 18px; height: 18px; fill: currentColor; }
+  .cta-note { margin-top: 1.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.2); position: relative; z-index: 2; }
+
+  footer {
+    padding: 2rem 4rem;
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand { font-family: 'DM Serif Display', serif; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { padding: 3rem 1.5rem; }
+    .hero-right::before { font-size: 10rem; }
+    .portfolio { padding: 5rem 1.5rem; }
+    .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .process { padding: 5rem 1.5rem; }
+    .process-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 6rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">Santiago Ríos</a>
+  <a href="https://wa.me/524778502089" target="_blank" class="nav-cta">Cotizar proyecto</a>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <p class="hero-tag">Diseño & Desarrollo Web · León, Gto.</p>
+    <h1 class="hero-name">
+      Páginas web<br>
+      que <em>venden</em><br>
+      por ti.
+    </h1>
+    <p class="hero-desc">
+      Diseño y desarrollo tu presencia digital desde cero — rápida, moderna y lista para aparecer en Google.
+    </p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat reveal">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Personalizadas</div>
+    </div>
+    <div class="hero-divider"></div>
+    <ul class="hero-services reveal">
+      <li>Diseño a medida para tu negocio</li>
+      <li>Optimización SEO incluida</li>
+      <li>Compatible con móviles</li>
+      <li>Publicación en internet</li>
+      <li>Enlace directo a WhatsApp</li>
+    </ul>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Diseño Web</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">SEO & Posicionamiento</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">León, Guanajuato</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Páginas Profesionales</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Diseño Web</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">SEO & Posicionamiento</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">León, Guanajuato</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Páginas Profesionales</span>
+    <span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<section class="portfolio" id="portafolio">
+  <div class="portfolio-header reveal">
+    <div>
+      <p class="section-label">Trabajo reciente</p>
+      <h2 class="section-title">Lo que<br>he creado.</h2>
+    </div>
+  </div>
+  <a class="portfolio-card reveal" href="https://yrg2929-lang.github.io/Zapateria-Yolanda" target="_blank">
+    <div class="portfolio-preview">
+      <span class="portfolio-preview-text">Zapatería Yolanda</span>
+    </div>
+    <div class="portfolio-info">
+      <p class="portfolio-tag">Página sencilla · Comercio local · León, Gto.</p>
+      <h3 class="portfolio-name">Zapatería Yolanda Ríos</h3>
+      <p class="portfolio-desc">Ejemplo de página básica de catálogo — diseño elegante, integración a WhatsApp y SEO. <em style="color:var(--green);font-style:normal;font-weight:500">¿Imaginas lo que puedo hacer con más elementos?</em></p>
+      <span class="portfolio-link">Ver proyecto →</span>
+    </div>
+  </a>
+</section>
+
+<section class="process" id="proceso">
+  <div class="reveal">
+    <p class="section-label">Cómo trabajo</p>
+    <h2 class="section-title">Simple y<br>sin complicaciones.</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-item reveal">
+      <div class="process-num">01</div>
+      <h3 class="process-title">Me cuentas tu idea</h3>
+      <p class="process-text">Por WhatsApp me dices qué necesitas: tu negocio, qué quieres mostrar y cómo te gustaría que se vea tu página.</p>
+    </div>
+    <div class="process-item reveal">
+      <div class="process-num">02</div>
+      <h3 class="process-title">Diseño y desarrollo</h3>
+      <p class="process-text">Creo tu página a medida — moderna, rápida y lista para aparecer en Google. Te la comparto para que veas el avance.</p>
+    </div>
+    <div class="process-item reveal">
+      <div class="process-num">03</div>
+      <h3 class="process-title">La publicamos</h3>
+      <p class="process-text">La subimos a internet y la registramos en Google. Tu negocio ya tiene presencia digital profesional.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contacto">
+  <p class="cta-tag reveal">¿Listo para empezar?</p>
+  <h2 class="cta-title reveal">Hablemos de<br>tu <em>proyecto.</em></h2>
+  <p class="cta-sub reveal">Sin compromisos. Solo platícame qué necesitas.</p>
+  <a href="https://wa.me/524778502089?text=Hola%20Santiago%2C%20me%20interesa%20una%20p%C3%A1gina%20web%20para%20mi%20negocio." target="_blank" class="cta-btn reveal">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Escribir por WhatsApp
+  </a>
+  <p class="cta-note reveal">477 850 2089 · León, Guanajuato</p>
+</section>
+
+<footer>
+  <span class="footer-brand">Santiago Ríos</span>
+  <span class="footer-copy">© 2025 · Diseño Web · León, Gto.</span>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
